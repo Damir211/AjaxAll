@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 1 Ajax.</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <form id="form">
+        <h2>Введите данные:</h2>
+        <input type="text" placeholder="Артикул товара" name="art">
+        <button type="submit">Отправить!</button> <br>
+    </form>
+    <p id="answ1"></p>
+    <p id="answ2"></p>
+    <p id="answ3"></p>
+    <a id="answ4"></a>
+    <script type="text/javascript">
+    $('#form').submit(function() {
+        var numbers = $(this).serialize();
+
+        $.ajax({
+            url: "http://ajax.markello.info/goods.php",
+            type: "GET",
+            data: numbers,
+            success: function(result) {
+                var answer = JSON.parse(result);
+                $('#answ1').text("Название товара - " + answer.name);
+                $('#answ2').text("Вес товара - " + answer.weight);
+                $('#answ3').text("Стоимость - " + answer.cost);
+                $('#answ4').attr("href", answer.img).text('Ссылка');
+            }
+        });
+        return false;
+    });
+    </script>
+</body>
+
+</html>

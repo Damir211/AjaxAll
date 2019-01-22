@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Задание 1 Ajax.</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<form id="form">
+		<h2>Напишите ваше: Имя и Фамилию, емайл адрес, телефон.</h2>
+		<input type="text" placeholder="Имя Фамилия" name="fio">
+		<input type="email" placeholder="email" name="email">
+		<input type="text" placeholder="87772255444" name="phone">
+		<button type="submit">Отправить!</button> <br>
+	</form>
+	<p id="answ"></p>
+	<script type="text/javascript">
+		$('#form').submit(function() {
+			var numbers = $(this).serialize();
+
+			$.ajax({
+				url: "http://ajax.markello.info/mail.php",
+				type: "POST",
+				data: numbers,
+				success: function(html) {
+					$('#answ').html(html);
+				}
+			});
+			return false;
+		});
+	</script>
+</body>
+
+</html>

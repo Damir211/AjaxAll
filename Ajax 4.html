@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задание 1 Ajax.</title>
+	<script
+	src="https://code.jquery.com/jquery-3.3.1.js"
+	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<form id="form">
+		<h2>Выберите пол и рост:</h2>
+		<input type="radio" name="sex" value="man"> Парень <br><br>
+		<input type="radio" name="sex" value="woman"> Девушка <br><br>
+		<input type="range" min="1" max="300" step="1" name="height" id="sizeShow"> Ваш рост <span id="size"></span> см. <br><br>
+		<button type="submit">Идеальный вес</button> <br>
+	</form>
+	<p id="answ"></p>
+	<script type="text/javascript">
+		$('#sizeShow').on('input',function(){
+			$('#size').text($('#sizeShow').val());
+		});
+		
+
+		$('#form').submit(function(){
+			var numbers = $(this).serialize();
+
+			$.ajax({
+				url: "http://ajax.markello.info/a3.php",
+				type:"POST",
+				data: numbers,
+				success: function(html){
+					$('#answ').html(html);
+				}
+			});
+			return false;
+		});
+
+	</script>
+</body>
+</html>
